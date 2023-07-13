@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
     [SerializeField] public GameObject buttonPrefab;
@@ -38,9 +40,37 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
     
     public void DefaultLevelPresenter(IPlayerProvider playerProvider, ILevelProvider levelProvider) {
         //get data about player and levels from the providers
-        Player curPlayer = playerProvider.LoadPlayerData(12345);
-        List<Level> levels = levelProvider.LoadLevels(curPlayer);
-        
+       // Player curPlayer = playerProvider.LoadPlayerData(12345);
+       //Player curPlayer = new Player(1); 
+       //List<Level> levels = levelProvider.LoadLevels(curPlayer);
+       List<Level> levels = new List<Level>();
+       bool rand = true;
+       for (int i = 1; i < 11; i++)
+       {
+           int scoring = 0;
+           Random random = new Random();
+           // Generate a random boolean value
+           bool isAvailable = rand && random.Next(2) == 0;
+           if (i == 1)
+           {
+               isAvailable = true;
+           }
+           rand = isAvailable;
+
+           if (isAvailable)
+           {
+               random = new Random();
+
+               // Generate a random number between 1 and 10
+               int randomNumber = random.Next(10) + 1;
+
+               // Calculate the final random number with jumps of 10
+               scoring = (randomNumber - 1) * 10 + 10;
+           }
+
+           Level l = new Level(i, "Level " + i, scoring, isAvailable);
+           levels.Add(l);
+       }
         //create the levels buttons
         foreach (Level level in levels)
         {
@@ -51,7 +81,13 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
             //init button name
             Score curLevelScore = LevelScoring(level);
             string buttonName = "" + level.LevelName + "\n" + curLevelScore.ScoreAsNum;
-            button.name = buttonName;
+            TextMesh buttonText = buttonGO.GetComponentInChildren<TextMesh>();
+
+            // Change the text of the button
+            if (buttonText != null)
+            {
+                buttonText.text = buttonName;
+            }
             
             // make button interacgible
             button.onClick.AddListener(() => ButtonClicked(level.LevelName)); // Assign a click listener to the button

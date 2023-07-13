@@ -1,6 +1,5 @@
-using System;
-
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     public class Player
     {
         private int _playerId;
