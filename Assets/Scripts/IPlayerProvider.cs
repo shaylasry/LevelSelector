@@ -1,6 +1,5 @@
-namespace DefaultNamespace {
-    public interface IPlayerProvider {
-        Player LoadPlayerData(int playerId);
+
+public interface IPlayerProvider {
+    Player LoadPlayerData(int playerId);
         
-    }
 }

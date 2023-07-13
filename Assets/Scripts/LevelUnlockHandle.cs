@@ -80,7 +80,7 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
             
             //init button name
             Score curLevelScore = LevelScoring(level);
-            string buttonName = "" + level.LevelName + "\n" + curLevelScore.ScoreAsNum;
+            string buttonName = "" + level.levelName + "\n" + curLevelScore.ScoreAsNum;
             TextMesh buttonText = buttonGO.GetComponentInChildren<TextMesh>();
 
             // Change the text of the button
@@ -90,7 +90,7 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
             }
             
             // make button interacgible
-            button.onClick.AddListener(() => ButtonClicked(level.LevelName)); // Assign a click listener to the button
+            button.onClick.AddListener(() => ButtonClicked(level.levelName)); // Assign a click listener to the button
             if (!IsLevelAvailable(level))
             {
                 button.enabled = false;
@@ -99,10 +99,10 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
     }
 
     public bool IsLevelAvailable(Level level) {
-        return level.IsAvailable;
+        return level.isAvailable;
     }
 
     public Score LevelScoring(Level level) {
-        return new Score(level.Scoring);
+        return new Score(level.scoring);
     }
 }
