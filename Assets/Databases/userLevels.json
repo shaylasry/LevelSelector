@@ -1,0 +1,118 @@
+{
+  "userLevels": [
+    {
+      "12345": {
+        "numberOfLevels": 10,
+        "levels": [
+          {
+            "levelNum": 1,
+            "scoring": 100,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 2,
+            "scoring": 90,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 3,
+            "scoring": 80,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 4,
+            "scoring": 70,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 5,
+            "scoring": 60,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 6,
+            "scoring": 50,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 7,
+            "scoring": 40,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 8,
+            "scoring": 30,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 9,
+            "scoring": 20,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 10,
+            "scoring": 10,
+            "isAvailable": true
+          }
+        ]
+      }
+    },
+    {
+      "67890": {
+        "numberOfLevels": 10,
+        "levels": [
+          {
+            "levelNum": 1,
+            "scoring": 100,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 2,
+            "scoring": 90,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 3,
+            "scoring": 80,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 4,
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 5,
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 6,
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 7,
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 8,
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 9,
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 10,
+            "scoring": 0,
+            "isAvailable": false
+          }
+        ]
+      }
+    }
+  ]
+}

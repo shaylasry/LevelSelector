@@ -11,20 +11,16 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
     private IPlayerProvider _playerProvider;
     private ILevelProvider _levelProvider;
     private List<Level> _levels;
+    
+    
     void Awake() {
+
         DefaultLevelPresenter(_playerProvider, _levelProvider);
     }
     // Start is called before the first frame update
     void Start()
     {
-        //init buttons? check if button are ok
-        for (int i = 0; i < 10; i++) {
-            int buttonIndex = i + 1;
-            GameObject buttonGO = Instantiate(buttonPrefab, transform);
-            Button button = buttonGO.GetComponent<Button>();
-            button.onClick.AddListener(() => ButtonClicked(buttonIndex)); // Assign a click listener to the button
-            button.enabled = true;
-        }
+        
         
     }
 
@@ -34,21 +30,27 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
         
     }
     
-    private void ButtonClicked(int buttonIndex)
+    private void ButtonClicked(string levelName)
     {
         // Log a message indicating which button was clicked
-        Debug.Log("Level " + buttonIndex + " clicked!");
+        Debug.Log(levelName);
     }
     
     public void DefaultLevelPresenter(IPlayerProvider playerProvider, ILevelProvider levelProvider) {
-        Player curPlayer = playerProvider.LoadPlayerData(1);
-        List<Level> levels = levelProvider.LoadLevels();
+       
+        Player curPlayer = playerProvider.LoadPlayerData(12345);
+        
+        List<Level> levels = levelProvider.LoadLevels(curPlayer);
         foreach (Level level in levels)
         {
-            // Code to be executed for each level
-            if (IsLevelAvailable(curPlayer, level)) {
-                Score levelScore = LevelScoring(curPlayer, level);
-                
+            GameObject buttonGO = Instantiate(buttonPrefab, transform);
+            Button button = buttonGO.GetComponent<Button>();
+            string buttonName = "" + level.LevelName + "\n" + level.Scoring;
+            button.name = buttonName;
+            button.onClick.AddListener(() => ButtonClicked(level.LevelName)); // Assign a click listener to the button
+            if (!level.IsAvailable)
+            {
+                button.enabled = false;
             }
         }
     }
