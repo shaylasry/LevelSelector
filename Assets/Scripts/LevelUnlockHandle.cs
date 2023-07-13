@@ -37,29 +37,36 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
     }
     
     public void DefaultLevelPresenter(IPlayerProvider playerProvider, ILevelProvider levelProvider) {
-       
+        //get data about player and levels from the providers
         Player curPlayer = playerProvider.LoadPlayerData(12345);
-        
         List<Level> levels = levelProvider.LoadLevels(curPlayer);
+        
+        //create the levels buttons
         foreach (Level level in levels)
         {
+            //create button object in runtime from Prefab
             GameObject buttonGO = Instantiate(buttonPrefab, transform);
             Button button = buttonGO.GetComponent<Button>();
-            string buttonName = "" + level.LevelName + "\n" + level.Scoring;
+            
+            //init button name
+            Score curLevelScore = LevelScoring(level);
+            string buttonName = "" + level.LevelName + "\n" + curLevelScore.ScoreAsNum;
             button.name = buttonName;
+            
+            // make button interacgible
             button.onClick.AddListener(() => ButtonClicked(level.LevelName)); // Assign a click listener to the button
-            if (!level.IsAvailable)
+            if (!IsLevelAvailable(level))
             {
                 button.enabled = false;
             }
         }
     }
 
-    public bool IsLevelAvailable(Player player, Level level) {
-        return false;
+    public bool IsLevelAvailable(Level level) {
+        return level.IsAvailable;
     }
 
-    public Score LevelScoring(Player player, Level level) {
-        throw new System.NotImplementedException();
+    public Score LevelScoring(Level level) {
+        return new Score(level.Scoring);
     }
 }
