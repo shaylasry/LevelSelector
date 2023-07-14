@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
+
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -15,22 +15,14 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
     private List<Level> _levels;
     
     
-    void Awake() {
-
+    void Awake()
+    {
+        _playerProvider = IPlayerProviderFactory.createPlayerProvider();
+        _levelProvider = ILevelProviderFactory.createLevelProvider();
+        
         DefaultLevelPresenter(_playerProvider, _levelProvider);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     private void ButtonClicked(string levelName)
     {
@@ -40,10 +32,8 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
     
     public void DefaultLevelPresenter(IPlayerProvider playerProvider, ILevelProvider levelProvider) {
         //get data about player and levels from the providers
-       // Player curPlayer = playerProvider.LoadPlayerData(12345);
-       //Player curPlayer = new Player(1); 
-       //List<Level> levels = levelProvider.LoadLevels(curPlayer);
-       List<Level> levels = new List<Level>();
+       Player curPlayer = playerProvider.LoadPlayerData(12345);
+       List<Level> levels = levelProvider.LoadLevels(curPlayer);
        bool rand = true;
        for (int i = 1; i < 11; i++)
        {

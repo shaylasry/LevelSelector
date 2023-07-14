@@ -1,0 +1,137 @@
+﻿{
+  "userLevels": [
+    {
+        "id" : 12345,
+        "numberOfLevels": 10,
+        "levels": [
+          {
+            "levelNum": 1,
+            "levelName": "Level 1",
+            "scoring": 100,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 2,
+            "levelName": "Level 2",
+            "scoring": 90,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 3,
+            "levelName": "Level 3",
+            "scoring": 80,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 4,
+            "levelName": "Level 4",
+            "scoring": 70,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 5,
+            "levelName": "Level 5",
+            "scoring": 60,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 6,
+            "levelName": "Level 6",
+            "scoring": 50,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 7,
+            "levelName": "Level 7",
+            "scoring": 40,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 8,
+            "levelName": "Level 8",
+            "scoring": 30,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 9,
+            "levelName": "Level 9",
+            "scoring": 20,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 10,
+            "levelName": "Level 10",
+            "scoring": 10,
+            "isAvailable": true
+          }
+        ]
+      }
+    ,
+    {
+        "id": 67890,
+        "numberOfLevels": 10,
+        "levels": [
+          {
+            "levelNum": 1,
+            "levelName": "Level 1",
+            "scoring": 100,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 2,
+            "levelName": "Level 2",
+            "scoring": 90,
+            "isAvailable": true
+          },
+          {
+            "levelNum": 3,
+            "levelName": "Level 3",
+            "scoring": 80,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 4,
+            "levelName": "Level 4",
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 5,
+            "levelName": "Level 5",
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 6,
+            "levelName": "Level 6",
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 7,
+            "levelName": "Level 7",
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 8,
+            "levelName": "Level 8",
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 9,
+            "levelName": "Level 9",
+            "scoring": 0,
+            "isAvailable": false
+          },
+          {
+            "levelNum": 10,
+            "levelName": "Level 10",
+            "scoring": 0,
+            "isAvailable": false
+          }
+        ]
+      }
+  ]
+}

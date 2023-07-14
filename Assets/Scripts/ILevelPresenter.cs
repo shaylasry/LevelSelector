@@ -1,9 +1,7 @@
-namespace DefaultNamespace {
-    public interface ILevelPresenter {
-        void DefaultLevelPresenter(IPlayerProvider playerProvider, ILevelProvider levelProvider);
+public interface ILevelPresenter {
+    void DefaultLevelPresenter(IPlayerProvider playerProvider, ILevelProvider levelProvider);
 
-        bool IsLevelAvailable(Level level);
-        Score LevelScoring(Level level);
+    bool IsLevelAvailable(Level level);
+    Score LevelScoring(Level level);
 
-    }
 }
