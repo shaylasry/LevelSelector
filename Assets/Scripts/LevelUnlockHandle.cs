@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -15,22 +15,14 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
     private List<Level> _levels;
     
     
-    void Awake() {
-
+    void Awake()
+    {
+        _playerProvider = IPlayerProviderFactory.createPlayerProvider();
+        _levelProvider = ILevelProviderFactory.createLevelProvider();
+        
         DefaultLevelPresenter(_playerProvider, _levelProvider);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     private void ButtonClicked(string levelName)
     {
@@ -40,37 +32,9 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
     
     public void DefaultLevelPresenter(IPlayerProvider playerProvider, ILevelProvider levelProvider) {
         //get data about player and levels from the providers
-       // Player curPlayer = playerProvider.LoadPlayerData(12345);
-       //Player curPlayer = new Player(1); 
-       //List<Level> levels = levelProvider.LoadLevels(curPlayer);
-       List<Level> levels = new List<Level>();
-       bool rand = true;
-       for (int i = 1; i < 11; i++)
-       {
-           int scoring = 0;
-           Random random = new Random();
-           // Generate a random boolean value
-           bool isAvailable = rand && random.Next(2) == 0;
-           if (i == 1)
-           {
-               isAvailable = true;
-           }
-           rand = isAvailable;
-
-           if (isAvailable)
-           {
-               random = new Random();
-
-               // Generate a random number between 1 and 10
-               int randomNumber = random.Next(10) + 1;
-
-               // Calculate the final random number with jumps of 10
-               scoring = (randomNumber - 1) * 10 + 10;
-           }
-
-           Level l = new Level(i, "Level " + i, scoring, isAvailable);
-           levels.Add(l);
-       }
+        Player curPlayer = playerProvider.LoadPlayerData(67890);
+        List<Level> levels = levelProvider.LoadLevels(curPlayer);
+       
         //create the levels buttons
         foreach (Level level in levels)
         {
@@ -79,14 +43,15 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
             Button button = buttonGO.GetComponent<Button>();
             
             //init button name
-            Score curLevelScore = LevelScoring(level);
-            string buttonName = "" + level.levelName + "\n" + curLevelScore.ScoreAsNum;
-            TextMesh buttonText = buttonGO.GetComponentInChildren<TextMesh>();
-
+            Score levelScore = LevelScoring(level);
+            string buttonName = "  " + level.levelName;
+            TextMeshProUGUI buttonText = buttonGO.GetComponentInChildren<TextMeshProUGUI>();
+            
             // Change the text of the button
             if (buttonText != null)
             {
                 buttonText.text = buttonName;
+                HandleScoring(levelScore, button, 100);
             }
             
             // make button interacgible
@@ -94,10 +59,37 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
             if (!IsLevelAvailable(level))
             {
                 button.enabled = false;
+                button.interactable = false;
             }
         }
     }
 
+    public void HandleScoring(Score score, Button button, int maxScore)
+    {
+        Transform buttonScroingGrid = button.transform.GetChild(1);
+        
+        Image firstStarImage = buttonScroingGrid.GetChild(2).GetComponent<Image>();
+        Image secondStarImage = buttonScroingGrid.GetChild(1).GetComponent<Image>();
+        Image thirdStarImage = buttonScroingGrid.GetChild(0).GetComponent<Image>();
+
+        float scoreDivision = maxScore / 3;
+        float firstStartGrading = 0.0f;
+        float secondStartGrading = scoreDivision;
+        float thirdStartGrading = scoreDivision * 2;
+
+        PaintStar(firstStarImage, score.scoreAsNum, firstStartGrading);
+        PaintStar(secondStarImage, score.scoreAsNum, secondStartGrading);
+        PaintStar(thirdStarImage, score.scoreAsNum, thirdStartGrading);
+
+    }
+
+    public void PaintStar(Image starImage, int playerScore, float scoreToPass)
+    {
+        if (playerScore > scoreToPass)
+            starImage.color = Color.white;
+        else
+            starImage.color = Color.gray;
+    }
     public bool IsLevelAvailable(Level level) {
         return level.isAvailable;
     }
