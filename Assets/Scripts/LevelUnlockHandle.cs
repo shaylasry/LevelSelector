@@ -44,13 +44,14 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
             
             //init button name
             Score levelScore = LevelScoring(level);
-            string buttonName = "" + level.levelName + "\n" + levelScore.ScoreAsNum;
+            string buttonName = "  " + level.levelName;
             TextMeshProUGUI buttonText = buttonGO.GetComponentInChildren<TextMeshProUGUI>();
-
+            
             // Change the text of the button
             if (buttonText != null)
             {
                 buttonText.text = buttonName;
+                HandleScoring(levelScore, button, 100);
             }
             
             // make button interacgible
@@ -58,10 +59,37 @@ public class LevelUnlockHandle : MonoBehaviour, ILevelPresenter {
             if (!IsLevelAvailable(level))
             {
                 button.enabled = false;
+                button.interactable = false;
             }
         }
     }
 
+    public void HandleScoring(Score score, Button button, int maxScore)
+    {
+        Transform buttonScroingGrid = button.transform.GetChild(1);
+        
+        Image firstStarImage = buttonScroingGrid.GetChild(2).GetComponent<Image>();
+        Image secondStarImage = buttonScroingGrid.GetChild(1).GetComponent<Image>();
+        Image thirdStarImage = buttonScroingGrid.GetChild(0).GetComponent<Image>();
+
+        float scoreDivision = maxScore / 3;
+        float firstStartGrading = 0.0f;
+        float secondStartGrading = scoreDivision;
+        float thirdStartGrading = scoreDivision * 2;
+
+        PaintStar(firstStarImage, score.scoreAsNum, firstStartGrading);
+        PaintStar(secondStarImage, score.scoreAsNum, secondStartGrading);
+        PaintStar(thirdStarImage, score.scoreAsNum, thirdStartGrading);
+
+    }
+
+    public void PaintStar(Image starImage, int playerScore, float scoreToPass)
+    {
+        if (playerScore > scoreToPass)
+            starImage.color = Color.white;
+        else
+            starImage.color = Color.gray;
+    }
     public bool IsLevelAvailable(Level level) {
         return level.isAvailable;
     }
