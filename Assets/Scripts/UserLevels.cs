@@ -6,27 +6,17 @@ using UnityEngine;
 
 [Serializable]
 
-public class RootObject {
-    public List <UserLevels> UserLevels {
-        get;
-        set;
-    }
+public class UsersLevelsData
+{
+    public List<UserLevels> UserLevels;
 }
 [Serializable]
 public class UserLevels
 {
-    public int id {
-        get;
-        set;
-    }
-    public int numberOfLevels {
-        get;
-        set;
-    }
-    public Level[] levels {
-        get;
-        set;
-    }
+    public int id;
+    public int numberOfLevels;
+
+    public List<Level> levels;
     // public List<UserLevelInfo> userLevels;
     //
     // public UserLevels(string jsonFilePath)

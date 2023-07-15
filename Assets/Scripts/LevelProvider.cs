@@ -10,11 +10,19 @@ using System.Text.RegularExpressions;
          string userLevelsJsonPath = Path.Combine(Application.dataPath, "Databases", "UserLevels.json");
          string json = File.ReadAllText(userLevelsJsonPath);
          Debug.Log("before fetch all users  "  + userLevelsJsonPath);
-         RootObject allUsers = JsonUtility.FromJson<RootObject>(json);
-         List<Level> levelList = new List<Level>();
+         UsersLevelsData allUsers = JsonUtility.FromJson<UsersLevelsData>(json);
          
+         //shuold init or not?
+         List<Level> levelList = new List<Level>();
+         foreach (UserLevels userLevels in allUsers.UserLevels)
+         {
+             if (userLevels.id == player.playerId)
+             {
+                 levelList = new List<Level>(userLevels.levels);
+             }
+         }
             
-            return levelList;
+         return levelList;
         }
         
    

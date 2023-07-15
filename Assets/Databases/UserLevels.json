@@ -1,5 +1,5 @@
 ﻿{
-  "userLevels": [
+  "UserLevels": [
     {
         "id" : 12345,
         "numberOfLevels": 10,
@@ -87,7 +87,7 @@
             "levelNum": 3,
             "levelName": "Level 3",
             "scoring": 80,
-            "isAvailable": false
+            "isAvailable": true
           },
           {
             "levelNum": 4,
